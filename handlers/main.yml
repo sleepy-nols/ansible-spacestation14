@@ -1,15 +1,16 @@
 ---
-- name: daemon_reload
-  service:
+- name: Daemon_reload
+  ansible.builtin.service:
+    name: "{{ ss14_name }}.service"
     daemon_reload: true
 
-- name: restart_ss14
-  service:
+- name: Restart_ss14
+  ansible.builtin.service:
     name: "{{ ss14_name }}.service"
     state: restarted
 
-- name: start_ss14
-  service:
+- name: Start_ss14
+  ansible.builtin.service:
     name: "{{ ss14_name }}.service"
     state: started
     enabled: true

@@ -1,11 +1,11 @@
 ---
 - name: Template systemd unit
-  template:
+  ansible.builtin.template:
     src: "templates/ss14.service"
     dest: "/etc/systemd/system/{{ ss14_name }}.service"
     owner: root
     group: root
-    mode: 700
+    mode: "0700"
   notify:
-    - daemon_reload
-    - restart_ss14
+    - Daemon_reload
+    - Restart_ss14
