@@ -1,16 +1,30 @@
+#
+# {{ ansible_managed }}
+#
+
 [net]
-# Reducing tickrate to 30 is basically unnoticeable
-# but reduces server, client and network load dramatically.
-tickrate = 30
+tickrate = {{ ss14_net_tickrate }}
+port = {{ ss14_net_port }}
 
 [game]
-# Changes the name of the server as it appears in the lobby and launcher.
-hostname = "Foo Station"
-# Enables the lobby instead of straight up throwing clients into a game.
-lobbyenabled = true
+hostname = "{{ ss14_game_hostname }}"
+desc = "{{ ss14_game_description }}"
+lobbyenabled = {{ ss14_game_lobby_enabled | bool }}
+maxplayers = {{ ss14_game_maxplayers }}
 
 [auth]
-# Enforces authentication so that ALL connecting clients must have a proper account.
-# Otherwise, guest logins are allowed.
-# Possible values here are: 0 (optional), 1 (required), 2 (disabled)
-mode = 1
+mode = {{ ss14_auth_mode }}
+
+[log]
+enabled = {{ ss14_log_enabled | bool }}
+path = "{{ ss14_log_path }}"
+
+[adminlogs]
+enabled = {{ ss14_admin_log_enabled | bool }}
+
+[loki]
+enabled = {{ ss14_loki_enabled | bool }}
+{% if ss14_loki_name is defined -%}name = "{{ ss14_loki_name }}"{% endif %}
+{% if ss14_loki_address is defined -%}address = "{{ ss14_loki_address }}"{% endif %}
+{% if ss14_loki_username is defined -%}username = "{{ ss14_loki_username }}"{% endif %}
+{% if ss14_loki_password is defined -%}password = "{{ ss14_loki_password }}"{% endif %}

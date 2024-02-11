@@ -1,11 +1,15 @@
+#
+# {{ ansible_managed }}
+#
+
 [Unit]
 Description=Spacestation 14 Server
 After=network.target
 
 [Service]
-Type=simple
+Type=exec
 Restart=on-failure
 User={{ ss14_unix_user }}
 Group={{ ss14_unix_group }}
 WorkingDirectory={{ deploy_helper.shared_path }}/server
-ExecStart=.{{ deploy_helper.shared_path }}/server/Robust.Server
+ExecStart={{ deploy_helper.shared_path }}/server/Robust.Server

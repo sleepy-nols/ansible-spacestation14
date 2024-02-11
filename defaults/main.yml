@@ -6,7 +6,17 @@ ss14_root_dir: "/opt/ss14"
 
 ss14_skip_install_dotnet: false
 
+ss14_net_tickrate: 30
+ss14_net_port: 1212
+ss14_game_hostname: "Foo Station"
+ss14_game_description: "Foo Description"
+ss14_game_lobby_enabled: true
+ss14_game_maxplayers: 64
+ss14_auth_mode: 1
+ss14_log_enabled: true
+ss14_log_path: "/var/log/ss14"
+ss14_admin_log_enabled: true
 
-
-# https://central.spacestation14.io/builds/wizards/builds.html
 ss14_download_url: "https://cdn.centcomm.spacestation14.com/builds/wizards/builds/b59dc2911ca4ffb46e187a31a59cb930b3f1654e/SS14.Server_linux-x64.zip"
+
+ss14_loki_enabled: false

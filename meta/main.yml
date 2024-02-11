@@ -1,0 +1,14 @@
+---
+galaxy_info:
+  role_name: Spacestation14
+  author: nols
+  description: Deploy and configure a Spacestation14 server on Debian
+  license: GPLv3
+  github_branch: main
+  platforms:
+    - name: Debian
+  galaxy_tags:
+    - ss14
+    - spacestation14
+  min_ansible_version: "2.15"
+dependencies: []

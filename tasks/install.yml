@@ -15,10 +15,10 @@
     path: "{{ deploy_helper.shared_path }}"
     owner: "{{ ss14_unix_user }}"
     group: "{{ ss14_unix_group }}"
-    mode: 744
+    mode: 0744
 
 - name: Download ss14 server
-  url_get:
+  get_url:
     url: "{{ ss14_download_url }}"
     dest: "{{ deploy_helper.new_release_path }}/ss14_server.zip"
 
@@ -33,10 +33,19 @@
     dest: "{{ deploy_helper.new_release_path }}"
     remote_src: yes
 
+- name: Set current release path perms
+  file:
+    state: directory
+    path: "{{ deploy_helper.new_release_path }}"
+    owner: "{{ ss14_unix_user }}"
+    group: "{{ ss14_unix_group }}"
+    mode: 0744
+    recurse: true
+
 - name: Add symlinks from the new release to the shared folder
   ansible.builtin.file:
-    path: '{{ deploy_helper.new_release_path }}'
-    src: '{{ deploy_helper.shared_path }}/server'
+    src: '{{ deploy_helper.new_release_path }}'
+    dest: '{{ deploy_helper.shared_path }}/server'
     state: link
 
 - name: Finalize the deploy, removing the unfinished file and switching the symlink

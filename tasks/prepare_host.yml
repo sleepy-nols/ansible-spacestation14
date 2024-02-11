@@ -1,0 +1,20 @@
+---
+- name: Make unix group
+  ansible.builtin.group:
+    name: "{{ ss14_unix_group }}"
+    state: present
+
+- name: Make unix user
+  ansible.builtin.user:
+    name: "{{ ss14_unix_user }}"
+    state: present
+    group: "{{ ss14_unix_group }}"
+    shell: "/bin/false"
+
+- name: Make log path
+  ansible.builtin.file:
+    state: directory
+    path: "{{ ss14_log_path }}"
+    owner: "{{ ss14_unix_user }}"
+    group: "{{ ss14_unix_group }}"
+    mode: 0700

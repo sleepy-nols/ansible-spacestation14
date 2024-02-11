@@ -1,7 +1,16 @@
 ---
+- name: Prepare host
+  include_tasks: prepare_host.yml
+
+- name: Check if dotnet is installed
+  apt:
+    pkg: "dotnet-runtime-8.0"
+  register: dotnet_installed
+  failed_when: false
+
 - name: Install dotnet runtime
   include_tasks: dotnet.yml
-  when: not ( ss14_skip_install_dotnet | bool )
+  when: ( not ( ss14_skip_install_dotnet | bool )) and ( dotnet_installed.failed | bool )
 
 - name: Install Spacestation 14
   include_tasks: install.yml
