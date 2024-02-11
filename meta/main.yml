@@ -1,6 +1,6 @@
 ---
 galaxy_info:
-  role_name: Spacestation14
+  role_name: spacestation14
   author: nols
   description: Deploy and configure a Spacestation14 server on Debian
   license: GPLv3
