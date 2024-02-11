@@ -9,9 +9,10 @@ Ansible role to install and configure [Spacestation 14](https://jellyfin.org/) o
 ---
 ## Role Variables and Defaults
 
-### General
+#### General
 
 ```yml
+ss14_name: "ss14"
 ss14_unix_user: "{{ ss14_name }}"
 ss14_unix_group: "{{ ss14_name }}"
 ```
@@ -56,7 +57,7 @@ Url to download the server from. Must be bumped to update to a new version.
 https://central.spacestation14.io/builds/wizards/builds.html
 
 ---
-### Grafana Loki
+#### Grafana Loki
 
 ```yml
 ss14_loki_enabled: false
