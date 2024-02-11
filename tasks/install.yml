@@ -4,42 +4,51 @@
     path: "{{ ss14_root_dir }}"
 
 - name: Make new release path
-  file:
+  ansible.builtin.file:
     state: directory
     path: "{{ deploy_helper.new_release_path }}"
+    owner: "{{ ss14_unix_user }}"
+    group: "{{ ss14_unix_group }}"
+    mode: "0744"
   changed_when: false
 
 - name: Set shared path perms
-  file:
+  ansible.builtin.file:
     state: directory
     path: "{{ deploy_helper.shared_path }}"
     owner: "{{ ss14_unix_user }}"
     group: "{{ ss14_unix_group }}"
-    mode: 0744
+    mode: "0744"
 
 - name: Download ss14 server
-  get_url:
+  ansible.builtin.get_url:
     url: "{{ ss14_download_url }}"
     dest: "{{ deploy_helper.new_release_path }}/ss14_server.zip"
+    owner: "{{ ss14_unix_user }}"
+    group: "{{ ss14_unix_group }}"
+    mode: "0744"
 
 - name: Add an unfinished file, to allow cleanup on successful finalize
   ansible.builtin.file:
     path: '{{ deploy_helper.new_release_path }}/{{ deploy_helper.unfinished_filename }}'
     state: touch
+    owner: "{{ ss14_unix_user }}"
+    group: "{{ ss14_unix_group }}"
+    mode: "0744"
 
 - name: Unpack server
   ansible.builtin.unarchive:
     src: "{{ deploy_helper.new_release_path }}/ss14_server.zip"
     dest: "{{ deploy_helper.new_release_path }}"
-    remote_src: yes
+    remote_src: true
 
 - name: Set current release path perms
-  file:
+  ansible.builtin.file:
     state: directory
     path: "{{ deploy_helper.new_release_path }}"
     owner: "{{ ss14_unix_user }}"
     group: "{{ ss14_unix_group }}"
-    mode: 0744
+    mode: "0744"
     recurse: true
 
 - name: Add symlinks from the new release to the shared folder

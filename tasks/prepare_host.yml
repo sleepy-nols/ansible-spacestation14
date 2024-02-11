@@ -17,4 +17,4 @@
     path: "{{ ss14_log_path }}"
     owner: "{{ ss14_unix_user }}"
     group: "{{ ss14_unix_group }}"
-    mode: 0700
+    mode: "0700"
