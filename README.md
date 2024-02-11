@@ -1,5 +1,5 @@
 # ansible-spacestation14
-Ansible role to install and configure [Spacestation 14](https://spacestation14.io/) on Debian.
+Ansible role to install and configure a [Spacestation 14](https://spacestation14.io/) server on Debian.
 
 ![ansible-lint](https://github.com/sleepy-nols/ansible-spacestation14/actions/workflows/ansible-lint.yml/badge.svg)
 ![push-galaxy](https://github.com/sleepy-nols/ansible-spacestation14/actions/workflows/ansible-galaxy-push-role.yml/badge.svg)
