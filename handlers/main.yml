@@ -1,7 +1,6 @@
 ---
 - name: Daemon_reload
   ansible.builtin.service:
-    name: "{{ ss14_name }}.service"
     daemon_reload: true
 
 - name: Restart_ss14
