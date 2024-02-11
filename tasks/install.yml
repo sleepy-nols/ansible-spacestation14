@@ -1,0 +1,46 @@
+---
+- name: Initialize the deploy root and gather facts
+  community.general.deploy_helper:
+    path: "{{ ss14_root_dir }}"
+
+- name: Make new release path
+  file:
+    state: directory
+    path: "{{ deploy_helper.new_release_path }}"
+  changed_when: false
+
+- name: Set shared path perms
+  file:
+    state: directory
+    path: "{{ deploy_helper.shared_path }}"
+    owner: "{{ ss14_unix_user }}"
+    group: "{{ ss14_unix_group }}"
+    mode: 744
+
+- name: Download ss14 server
+  url_get:
+    url: "{{ ss14_download_url }}"
+    dest: "{{ deploy_helper.new_release_path }}/ss14_server.zip"
+
+- name: Add an unfinished file, to allow cleanup on successful finalize
+  ansible.builtin.file:
+    path: '{{ deploy_helper.new_release_path }}/{{ deploy_helper.unfinished_filename }}'
+    state: touch
+
+- name: Unpack server
+  ansible.builtin.unarchive:
+    src: "{{ deploy_helper.new_release_path }}/ss14_server.zip"
+    dest: "{{ deploy_helper.new_release_path }}"
+    remote_src: yes
+
+- name: Add symlinks from the new release to the shared folder
+  ansible.builtin.file:
+    path: '{{ deploy_helper.new_release_path }}'
+    src: '{{ deploy_helper.shared_path }}/server'
+    state: link
+
+- name: Finalize the deploy, removing the unfinished file and switching the symlink
+  community.general.deploy_helper:
+    path: "{{ ss14_root_dir }}"
+    release: '{{ deploy_helper.new_release }}'
+    state: finalize

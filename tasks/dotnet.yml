@@ -1,0 +1,21 @@
+---
+- name: Make temp apt key dir
+  file:
+    state: directory
+    path: /tmp/apt_key
+
+- name: apt key
+  get_url:
+    url: "https://packages.microsoft.com/config/debian/12/packages-microsoft-prod.deb"
+    dest: "/tmp/apt_key/packages-microsoft-prod.deb"
+  changed_when: false
+
+- name: Run apt key
+  command: "cd /tmp/apt_key; dpkg -i packages-microsoft-prod.deb"
+  changed_when: false
+
+- name: Install dotnet runtime
+  apt:
+    pkg: "dotnet-runtime-8.0"
+    update_cache: true
+  notify: restart_ss14

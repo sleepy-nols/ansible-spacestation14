@@ -1,0 +1,13 @@
+---
+- name: Install dotnet runtime
+  include_tasks: dotnet.yml
+  when: not ( ss14_skip_install_dotnet | bool )
+
+- name: Install Spacestation 14
+  include_tasks: install.yml
+
+- name: Configure ss14
+  include_tasks: configure.yml
+
+- name: Make systemd unit
+  include_tasks: systemd.yml

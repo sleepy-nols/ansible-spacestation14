@@ -1,0 +1,13 @@
+---
+
+# https://docs.spacestation14.com/en/general-development/tips/config-file-reference.html
+- name: Make ss14 config
+  template:
+    src: templates/server_config.toml
+    dest: "{{ deploy_helper.shared_path }}"
+    owner: "{{ ss14_unix_user }}"
+    group: "{{ ss14_unix_group }}"
+    mode: 744
+  notify:
+    - start_ss14
+    - restart_ss14

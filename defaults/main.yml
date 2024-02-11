@@ -1,0 +1,12 @@
+---
+ss14_name: "ss14"
+ss14_unix_user: "{{ ss14_name }}"
+ss14_unix_group: "{{ ss14_name }}"
+ss14_root_dir: "/opt/ss14"
+
+ss14_skip_install_dotnet: false
+
+
+
+# https://central.spacestation14.io/builds/wizards/builds.html
+ss14_download_url: "https://cdn.centcomm.spacestation14.com/builds/wizards/builds/b59dc2911ca4ffb46e187a31a59cb930b3f1654e/SS14.Server_linux-x64.zip"
